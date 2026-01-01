@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import React, { useState } from "react";
 
 const ProductCard = () => {
@@ -67,9 +68,10 @@ const ProductCard = () => {
                          ))}
                     </div>
 
-                    <button className="bg-white text-black font-bold text-base px-12 py-3 rounded hover:bg-gray-100 transition-colors">
+                    <Link href="/order-success">
+                      <button className="bg-white cursor-pointer text-black font-bold text-base px-12 py-3 rounded hover:bg-gray-100 transition-colors">
                          Buy Now
-                    </button>
+                    </button></Link>
                </div>
           </div>
      );
