@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 
@@ -15,63 +16,29 @@ const ProductCard = () => {
      ];
 
      return (
-          <div className="relative w-78 h-101.25 bg-[#1f1f1f] overflow-hidden">
-               <div className="absolute bottom-60 -right-10 w-[384px] h-96 bg-[#b91c1c] rounded-full z-0" />
+          <div className="w-[312px] h-[405px] relative overflow-hidden rounded-none bg-[#1f1f1f]">
+               <div
+                    className="absolute top-[-155px] z-40 left-[-11px] w-[384px] h-[384px] rounded-full"
+                    style={{ backgroundColor: "#9ADA2A" }}
+               />
 
-               <div className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none">
-                    <span className="text-[120px] font-extrabold italic text-white/5 tracking-widest select-none">
-                         NIKE
-                    </span>
+               <div className="absolute bottom-[85px] left-[-10px] z-0">
+                    <p className="text-[160px] font-extrabold tracking-tight italic text-[#ffffff] opacity-3">NIKE</p>
                </div>
 
-               <div className="relative z-10 mt-12 flex justify-center">
-                    <img
-                         src="/products/frame 8 (1).png"
+               <div className="">
+                    <Image
+                         src="/products/Frame 8.png"
                          alt="Nike Shoe"
-                         className="w-70 h-auto -rotate-2 drop-shadow-2xl"
+                         width={260}
+                         height={160}
+                         priority
+                         className="absolute top-[76px] left-[40px] z-100 rotate-[3deg]"
                     />
                </div>
 
-               <div className="absolute bottom-0 w-full text-center z-10 px-6 pb-8">
-                    <h2 className="text-white text-2xl font-bold tracking-wide mb-6">NIKE SHOES</h2>
-
-                    <div className="flex items-center justify-center gap-3 mb-5">
-                         <span className="text-white font-semibold text-sm">SIZE:</span>
-                         {sizes.map((size) => (
-                              <button
-                                   key={size}
-                                   onClick={() => setSelectedSize(size)}
-                                   className={`w-10 h-10 rounded font-bold text-sm transition-colors ${
-                                        selectedSize === size
-                                             ? "bg-white text-black"
-                                             : "bg-transparent text-white border-2 border-white"
-                                   }`}
-                              >
-                                   {size}
-                              </button>
-                         ))}
-                    </div>
-
-                    <div className="flex items-center justify-center gap-3 mb-6">
-                         <span className="text-white font-semibold text-sm">COLOR:</span>
-                         {colors.map((color) => (
-                              <button
-                                   key={color.name}
-                                   onClick={() => setSelectedColor(color.name)}
-                                   className={`w-8 h-8 rounded-full transition-transform ${
-                                        selectedColor === color.name
-                                             ? "ring-2 ring-white ring-offset-2 ring-offset-[#1f1f1f] scale-110"
-                                             : ""
-                                   }`}
-                                   style={{ backgroundColor: color.value }}
-                              />
-                         ))}
-                    </div>
-
-                    <Link href="/order-success">
-                      <button className="bg-white cursor-pointer text-black font-bold text-base px-12 py-3 rounded hover:bg-gray-100 transition-colors">
-                         Buy Now
-                    </button></Link>
+               <div className="absolute bottom-[40px] w-full text-center z-20">
+                    <p className="text-white text-[18px] font-semibold tracking-wide">NIKE SHOES</p>
                </div>
           </div>
      );
