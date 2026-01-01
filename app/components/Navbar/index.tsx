@@ -7,7 +7,7 @@ const Navbar = () => {
           <div className="flex item-center w-full bg-[#191919] py-2 px-14 justify-between">
                <Image src="/nike-nav-img.png" alt="nike-nav-img" width={52} height={52} />
                <div className="flex items-center gap-4 text-white">
-                    <Link href="/view-orders" aria-label="View orders">
+                    <Link href="/my-orders" aria-label="View orders">
                          <FaUserCircle className="cursor-pointer text-2xl hover:opacity-80" />
                     </Link>
                     <Link href="/Login">
