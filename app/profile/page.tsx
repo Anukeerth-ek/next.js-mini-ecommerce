@@ -1,6 +1,4 @@
-import React from "react";
-
-const MyOrders = () => {
+const Profile = () => {
      const orders = [
           {
                id: 1,
@@ -56,4 +54,4 @@ const MyOrders = () => {
      );
 };
 
-export default MyOrders;
+export default Profile;
