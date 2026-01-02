@@ -3,8 +3,16 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { Product } from "@/app/types/product";
+import { useRouter } from "next/navigation";
 
-const ProductCard = () => {
+type Props = {
+     product: Product;
+};
+
+const ProductCard = ({ product }: Props) => {
+     console.log("prd", product);
+
      const cardRef = useRef<HTMLDivElement>(null);
 
      const circleRef = useRef<HTMLDivElement>(null);
@@ -141,6 +149,12 @@ const ProductCard = () => {
           };
      }, []);
 
+     const router = useRouter();
+
+     const handleBuyNow = () => {
+          router.push(`/order-success?product=${encodeURIComponent(JSON.stringify(product))}`);
+     };
+
      return (
           <div ref={cardRef} className="relative h-[405px] w-[312px] overflow-hidden bg-[#1f1f1f] text-white">
                <div
@@ -158,7 +172,7 @@ const ProductCard = () => {
 
                <Image
                     ref={shoeRef}
-                    src="/products/Frame 8.png"
+                    src={product.image ?? ""}
                     alt="Nike Shoe"
                     width={260}
                     height={160}
@@ -204,8 +218,9 @@ const ProductCard = () => {
                </div>
 
                <button
+                      onClick={handleBuyNow}
                     ref={buttonRef}
-                    className="absolute bottom-7 left-1/2 -translate-x-1/2 w-1/2 rounded-md bg-white p-2.5 font-semibold text-black"
+                    className="absolute cursor-pointer bottom-7 left-1/2 -translate-x-1/2 w-1/2 rounded-md bg-white p-2.5 font-semibold text-black"
                >
                     Buy Now
                </button>
