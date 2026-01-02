@@ -17,7 +17,11 @@ const OrderSuccess = () => {
      try {
           product = JSON.parse(decodeURIComponent(productParam));
      } catch {
-          return <div className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center">Invalid Order</div>;
+          return (
+               <div className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center">
+                    Invalid Order Data
+               </div>
+          );
      }
 
      return (
