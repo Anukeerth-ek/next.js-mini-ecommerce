@@ -1,38 +1,42 @@
-"use client";
-
-export const dynamic = "force-dynamic";
-
-import { useSearchParams } from "next/navigation";
 import { HorizontalProductCard } from "../components/HorizontalProductCard";
 
-const OrderSuccess = () => {
-     const searchParams = useSearchParams();
-     const productParam = searchParams.get("product");
+interface PageProps {
+  searchParams: {
+    product?: string;
+  };
+}
 
-     if (!productParam) {
-          return <div className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center">Invalid Order</div>;
-     }
+export default function OrderSuccess({ searchParams }: PageProps) {
+  const productParam = searchParams.product;
 
-     let product;
-     try {
-          product = JSON.parse(decodeURIComponent(productParam));
-     } catch {
-          return (
-               <div className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center">
-                    Invalid Order Data
-               </div>
-          );
-     }
+  if (!productParam) {
+    return (
+      <div className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center">
+        Invalid Order
+      </div>
+    );
+  }
 
-     return (
-          <div className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center px-4">
-               <div className="text-center max-w-md w-full">
-                    <h1 className="text-3xl font-bold mb-3">Successfully Ordered!</h1>
+  let product;
+  try {
+    product = JSON.parse(decodeURIComponent(productParam));
+  } catch {
+    return (
+      <div className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center">
+        Invalid Order Data
+      </div>
+    );
+  }
 
-                    <HorizontalProductCard product={product} />
-               </div>
-          </div>
-     );
-};
+  return (
+    <div className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center px-4">
+      <div className="text-center max-w-md w-full">
+        <h1 className="text-3xl font-bold mb-3">
+          Successfully Ordered!
+        </h1>
 
-export default OrderSuccess;
+        <HorizontalProductCard product={product} />
+      </div>
+    </div>
+  );
+}
