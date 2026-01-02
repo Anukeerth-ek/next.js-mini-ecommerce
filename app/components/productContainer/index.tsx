@@ -1,80 +1,89 @@
+import { Product } from "@/app/types/product";
 import ProductCard from "../ProductCard/index";
 
 export const ProductContainer = () => {
-  const products = [
-    {
-      id: 1,
-      name: "Nike Air Max 90",
-      size: "UK 7, 9ADA2A",
-      date: "12:34 PM, 20th Dec 2025",
-      price: "1,200",
-      originalPrice: "1,300",
-      image: "/products/nike-red.png",
-    },
-    {
-      id: 2,
-      name: "Nike Air Max 90",
-      size: "UK 7, 9ADA2A",
-      date: "12:34 PM, 20th Dec 2025",
-      price: "1,200",
-      originalPrice: "1,300",
-      image: "/products/nike-purple.png",
-    },
-    {
-      id: 3,
-      name: "Nike Air Max 90",
-      size: "UK 7, 9ADA2A",
-      date: "12:34 PM, 20th Dec 2025",
-      price: "1,200",
-      originalPrice: "1,300",
-      image: "/products/nike-limegreen.png",
-    },
-    {
-      id: 4,
-      name: "Nike Air Max 90",
-      size: "UK 7, 9ADA2A",
-      date: "12:34 PM, 20th Dec 2025",
-      price: "1,200",
-      originalPrice: "1,300",
-      image: "/products/nike-pink.png",
-    },
-   {
-      id: 5,
-      name: "Nike Air Max 90",
-      size: "UK 7, 9ADA2A",
-      date: "12:34 PM, 20th Dec 2025",
-      price: "1,200",
-      originalPrice: "1,300",
-      image: "/products/nike-limegreen.png",
-    },
-    {
-      id: 6,
-      name: "Nike Air Max 90",
-      size: "UK 7, 9ADA2A",
-      date: "12:34 PM, 20th Dec 2025",
-      price: "1,200",
-      originalPrice: "1,300",
-      image: "/products/nike-pink.png",
-    },
-    {
-      id: 7,
-      name: "Nike Air Max 90",
-      size: "UK 7, 9ADA2A",
-      date: "12:34 PM, 20th Dec 2025",
-      price: "1,200",
-      originalPrice: "1,300",
-      image: "/products/nike-red.png",
-    },
-    {
-      id: 8,
-      name: "Nike Air Max 90",
-      size: "UK 7, 9ADA2A",
-      date: "12:34 PM, 20th Dec 2025",
-      price: "1,200",
-      originalPrice: "1,300",
-      image: "/products/nike-purple.png",
-    },
-  ];
+ const products: Product[] = [
+  {
+    id: 1,
+    name: "Nike Air Max 90",
+    price: "1,200",
+    originalPrice: "1,300",
+    variants: [
+      { color: "red", bgColor: "#9D333B", image: "/products/nike-red.png" },
+      { color: "purple", bgColor: "#6B4EFF", image: "/products/nike-purple.png" },
+      { color: "green", bgColor: "#9ADA2A", image: "/products/nike-limegreen.png" },
+      { color: "pink", bgColor: "#FF6FB1", image: "/products/nike-pink.png" },
+    ],
+  },
+  {
+    id: 2,
+    name: "Nike Air Max 90",
+    price: "1,200",
+    originalPrice: "1,300",
+    variants: [
+      { color: "green", bgColor: "#9ADA2A", image: "/products/nike-limegreen.png" },
+      { color: "red", bgColor: "#9D333B", image: "/products/nike-red.png" },
+    ],
+  },
+  {
+    id: 3,
+    name: "Nike Air Max 90",
+    price: "1,200",
+    originalPrice: "1,300",
+    variants: [
+      { color: "purple", bgColor: "#6B4EFF", image: "/products/nike-purple.png" },
+      { color: "pink", bgColor: "#FF6FB1", image: "/products/nike-pink.png" },
+    ],
+  },
+  {
+    id: 4,
+    name: "Nike Air Max 90",
+    price: "1,200",
+    originalPrice: "1,300",
+    variants: [
+      { color: "red", bgColor: "#9D333B", image: "/products/nike-red.png" },
+      { color: "green", bgColor: "#9ADA2A", image: "/products/nike-limegreen.png" },
+    ],
+  },
+  {
+    id: 5,
+    name: "Nike Air Max 90",
+    price: "1,200",
+    originalPrice: "1,300",
+    variants: [
+      { color: "pink", bgColor: "#FF6FB1", image: "/products/nike-pink.png" },
+    ],
+  },
+  {
+    id: 6,
+    name: "Nike Air Max 90",
+    price: "1,200",
+    originalPrice: "1,300",
+    variants: [
+      { color: "green", bgColor: "#9ADA2A", image: "/products/nike-limegreen.png" },
+      { color: "purple", bgColor: "#6B4EFF", image: "/products/nike-purple.png" },
+    ],
+  },
+  {
+    id: 7,
+    name: "Nike Air Max 90",
+    price: "1,200",
+    originalPrice: "1,300",
+    variants: [
+      { color: "red", bgColor: "#9D333B", image: "/products/nike-red.png" },
+    ],
+  },
+  {
+    id: 8,
+    name: "Nike Air Max 90",
+    price: "1,200",
+    originalPrice: "1,300",
+    variants: [
+      { color: "purple", bgColor: "#6B4EFF", image: "/products/nike-purple.png" },
+      { color: "pink", bgColor: "#FF6FB1", image: "/products/nike-pink.png" },
+    ],
+  },
+];
 
   return (
     <div className="grid grid-cols-4 gap-4">

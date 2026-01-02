@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { Product } from "@/app/types/product";
 import { useRouter } from "next/navigation";
@@ -12,6 +12,10 @@ type Props = {
 
 const ProductCard = ({ product }: Props) => {
      console.log("prd", product);
+
+      const [activeVariant, setActiveVariant] = useState(
+    product.variants[0]
+  );
 
      const cardRef = useRef<HTMLDivElement>(null);
 
@@ -160,7 +164,7 @@ const ProductCard = ({ product }: Props) => {
                <div
                     ref={circleRef}
                     className="absolute h-[384px] w-[384px] rounded-full will-change-transform"
-                    style={{ top: -155, left: -11, backgroundColor: "#9ADA2A" }}
+                    style={{ top: -155, left: -11, backgroundColor: activeVariant.bgColor, }}
                />
 
                <p
@@ -172,7 +176,7 @@ const ProductCard = ({ product }: Props) => {
 
                <Image
                     ref={shoeRef}
-                    src={product.image ?? ""}
+                     src={activeVariant.image}
                     alt="Nike Shoe"
                     width={260}
                     height={160}
@@ -205,17 +209,29 @@ const ProductCard = ({ product }: Props) => {
                     </div>
                </div>
 
-               <div ref={colorRef} className="absolute top-[290px] w-full px-8 z-30">
-                    <div className="flex justify-center items-center gap-4">
-                         <span className="text-md font-medium">COLOR:</span>
+             <div
+        ref={colorRef}
+        className="absolute top-[290px] w-full px-8 z-30"
+      >
+        <div className="flex justify-center items-center gap-4">
+          <span className="text-md font-medium">COLOR:</span>
 
-                         <div className="flex gap-1.5">
-                              <span className="h-4 w-4 rounded-full bg-lime-400 ring-2 ring-white" />
-                              <span className="h-4 w-4 rounded-full bg-purple-600" />
-                              <span className="h-4 w-4 rounded-full bg-red-600" />
-                         </div>
-                    </div>
-               </div>
+          <div className="flex gap-2">
+            {product.variants.map((variant) => (
+              <button
+                key={variant.color}
+                onClick={() => setActiveVariant(variant)}
+                className={`h-4 w-4 rounded-full transition-all ${
+                  activeVariant.color === variant.color
+                    ? "ring-2 ring-white scale-110"
+                    : ""
+                }`}
+                style={{ backgroundColor: variant.bgColor }}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
 
                <button
                       onClick={handleBuyNow}

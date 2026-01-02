@@ -1,10 +1,11 @@
 import Image from "next/image";
 
 export const HorizontalProductCard = ({ product, className = "" }: any) => {
+     const productImage = product.variants[0].image
      return (
           <div className={`bg-[#1a1a1a] rounded-2xl p-4 pr-6 flex items-center gap-4 ${className}`}>
                <div className="bg-[#a3e635] rounded-2xl p-4 shrink-0">
-                    <Image src={product.image} alt="product-name" className=" object-contain" width={109} height={96} />
+                    <Image src={productImage} alt="product-name" className=" object-contain" width={109} height={96} />
                </div>
 
                <div className="grow">
