@@ -5,32 +5,26 @@ import { signToken } from "@/lib/jwt";
 export async function POST(req: Request) {
   const { phone, otp, name } = await req.json();
 
+  console.log("VERIFY INPUT", phone, otp);
+  console.log("STORE USER", users.get(phone));
+
   const user = users.get(phone);
 
   if (!user || user.otp !== otp) {
-    return NextResponse.json(
-      { error: "Invalid OTP" },
-      { status: 401 }
-    );
+    return NextResponse.json({ error: "Invalid OTP" }, { status: 401 });
   }
 
-  // If new user, save name
-  if (!user.name && name) {
-    user.name = name;
-    users.set(phone, user);
-  }
+  if (name) user.name = name;
 
   const token = signToken({ phone });
 
   const res = NextResponse.json({
-    success: true,
     phone,
     name: user.name,
   });
 
   res.cookies.set("token", token, {
     httpOnly: true,
-    sameSite: "lax",
     path: "/",
   });
 

@@ -1,52 +1,81 @@
+// app/login/page.tsx
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
-const Login = () => {
-     const [phone, setPhone] = useState("");
+import { NameStep } from "../components/auth/NameStep";
+import AuthLayout from "../components/auth/AuthLayout";
+import { PhoneStep } from "../components/auth/PhoneStep";
+import { OtpStep } from "../components/auth/OtpStep";
 
-     const handleSubmit = () => {
-          console.log("Phone:", phone);
-     };
 
-     return (
-          <div className="flex h-screen w-full">
-               <div className="w-1/2 relative overflow-hidden">
-                    <img
-                         src="https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&h=1200&fit=crop"
-                         alt="Basketball player"
-                         className="w-full h-full object-cover"
-                    />
-               </div>
+export default function LoginPage() {
+  const router = useRouter();
 
-               <div className="w-1/2 bg-black flex items-center justify-center px-16">
-                    <div className="w-full max-w-sm">
-                         <h1 className="text-white text-4xl font-bold mb-12">Log In</h1>
+  const [step, setStep] = useState<"phone" | "otp" | "name">("phone");
+  const [phone, setPhone] = useState("");
+  const [otp, setOtp] = useState("");
+  const [name, setName] = useState("");
 
-                         <div className="mb-6">
-                              <label htmlFor="phone" className="block text-white text-sm mb-3">
-                                   Phone
-                              </label>
-                              <input
-                                   id="phone"
-                                   type="tel"
-                                   placeholder="Enter Phone"
-                                   value={phone}
-                                   onChange={(e) => setPhone(e.target.value)}
-                                   className="w-full bg-[#1a1a1a] text-white placeholder-gray-500 px-4 py-3 rounded border border-gray-800 focus:outline-none focus:border-gray-600 transition-colors"
-                              />
-                         </div>
+  const sendOtp = async () => {
+    await fetch("/api/auth/login", {
+      method: "POST",
+      body: JSON.stringify({ phone }),
+    });
+    setStep("otp");
+  };
 
-                         <button
-                              onClick={handleSubmit}
-                              className="w-full bg-white text-black font-semibold py-3 rounded hover:bg-gray-100 transition-colors"
-                         >
-                              Continue
-                         </button>
-                    </div>
-               </div>
-          </div>
-     );
+const verifyOtp = async () => {
+  console.log("FRONTEND VERIFY", phone, otp);
+
+  const res = await fetch("/api/auth/verify", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      phone,
+      otp,
+    }),
+  });
+
+  if (!res.ok) {
+    console.error("VERIFY FAILED");
+    return;
+  }
+
+  const data = await res.json();
+  console.log("VERIFY SUCCESS", data);
 };
 
-export default Login;
+  const submitName = async () => {
+    await fetch("/api/auth/verify", {
+      method: "POST",
+      body: JSON.stringify({ phone, otp, name }),
+    });
+
+    router.push("/profile");
+  };
+
+  return (
+    <AuthLayout>
+      {step === "phone" && (
+        <PhoneStep phone={phone} setPhone={setPhone} onContinue={sendOtp} />
+      )}
+
+      {step === "otp" && (
+        <OtpStep
+          phone={phone}
+          otp={otp}
+          setOtp={setOtp}
+          onVerify={verifyOtp}
+        />
+      )}
+
+      {step === "name" && (
+        <NameStep name={name} setName={setName} onContinue={submitName} />
+      )}
+    </AuthLayout>
+  );
+}

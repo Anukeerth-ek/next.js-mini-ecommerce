@@ -9,12 +9,12 @@ export async function POST(req: Request) {
   }
 
   // fake OTP
-  const otp = "123456";
+  const otp = "1234";
 
   users.set(phone, { otp });
 
   return NextResponse.json({
     success: true,
-    message: "OTP sent (use 123456)",
+    message: "OTP sent (use 1234)",
   });
 }

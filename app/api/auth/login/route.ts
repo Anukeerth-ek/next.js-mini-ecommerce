@@ -12,7 +12,7 @@ export async function POST(req: Request) {
   }
 
   // Fake OTP (for now)
-  const otp = "123456";
+  const otp = "1234";
 
   // Store OTP in memory
   users.set(phone, {
